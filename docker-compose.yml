@@ -1,0 +1,9 @@
+# Docker compose file to run dashboard standalone
+version: '2'
+services:
+  hello:
+    build:
+      context: ./
+    image: hello-world:compose
+    ports:
+     - "3000:3000"

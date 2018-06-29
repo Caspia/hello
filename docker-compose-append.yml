@@ -1,0 +1,16 @@
+# Docker compose file to append to beluga base
+  hello:
+    build:
+      context: ../hello
+    image: caspia/hello:append
+    ports:
+      - "3000:3000"
+    environment:
+      - VIRTUAL_HOST=hello.ed
+      - VIRTUAL_PORT=3000
+    depends_on:
+      - dnsmasq
+      - nginx-proxy
+    container_name: hello
+    restart: always
+    
