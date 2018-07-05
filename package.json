@@ -1,5 +1,5 @@
 {
-  "name": "hello-world",
+  "name": "hello",
   "version": "1.0.0",
   "description": "Hello world express example for beluga demo",
   "main": "app.js",
@@ -10,5 +10,9 @@
   "license": "MIT",
   "dependencies": {
     "express": "^4.16.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/caspia/hello.git"
   }
 }

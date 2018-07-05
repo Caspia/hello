@@ -1,4 +1,4 @@
-FROM node:8-alpine
+FROM node:10.3-alpine
 
 # utilities helpful in development
 RUN apk add --no-cache nano curl 
