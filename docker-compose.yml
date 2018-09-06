@@ -1,18 +1,27 @@
 # Docker compose file to run hello demo app
-version: '2'
-services:
-  hello:
-    build:
-      context: ./
-    image: caspia/hello:latest
-    container_name: hello
-    environment:
-      - VIRTUAL_HOST=hello.ed
-      - VIRTUAL_PORT=3000
-    ports:
-     - "3000:3000"
+version: '3'
 
 networks:
   default:
     external:
-      name: nginx-proxy
+      name: beluga
+
+services:
+  hello:
+    build:
+      context: ./
+      args:
+        HELLO_PORT: ${HELLO_PORT:-3000}
+    image: caspia/hello:latest
+    container_name: hello
+    environment:
+      - HELLO_PORT=${HELLO_PORT:-3000}
+      - VIRTUAL_HOST=hello.ed,hello.ed.local
+      - VIRTUAL_PORT=${HELLO_PORT:-3000}
+    ports:
+     - "${HELLO_PORT:-3000}:${HELLO_PORT:-3000}"
+    restart: always
+    networks:
+      default:
+        aliases:
+          - hello

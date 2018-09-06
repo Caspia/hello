@@ -13,7 +13,10 @@ if [ "$HELLO_PORT" == "" ]; then
 fi
 export HELLO_PORT=$HELLO_PORT
 
-docker run -d --restart=always -p "$HELLO_PORT:$HELLO_PORT" \
- --name hello --net-alias hello.ed --net-alias demo.ed --network="beluga" \
- --env "VIRTUAL_HOST=hello.ed,demo.ed" -e "VIRTUAL_PORT=$HELLO_PORT" \
+docker run -d --restart=always --network="beluga" \
+ --name hello --net-alias hello \
+ --env "VIRTUAL_HOST=hello.ed,hello.ed.local" \
+ --env "VIRTUAL_PORT=$HELLO_PORT" \
+ --env "HELLO_PORT=$HELLO_PORT" \
+ -p "$HELLO_PORT:$HELLO_PORT" \
  caspia/hello:latest 
