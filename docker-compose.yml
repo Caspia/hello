@@ -1,9 +1,18 @@
-# Docker compose file to run dashboard standalone
+# Docker compose file to run hello demo app
 version: '2'
 services:
   hello:
     build:
       context: ./
-    image: hello-world:compose
+    image: caspia/hello:latest
+    container_name: hello
+    environment:
+      - VIRTUAL_HOST=hello.ed
+      - VIRTUAL_PORT=3000
     ports:
      - "3000:3000"
+
+networks:
+  default:
+    external:
+      name: nginx-proxy
