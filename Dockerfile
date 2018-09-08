@@ -1,6 +1,7 @@
-FROM node:10.9
+FROM node:10.9-alpine
 
-ARG HELLO_PORT
+ARG HELLO_PORT=3000
+ENV HELLO_PORT $HELLO_PORT
 # utilities helpful in development
 # RUN apk add --no-cache nano curl 
 # create app directory
@@ -15,6 +16,6 @@ RUN chown node:node -R .
 USER node
 RUN npm install
 
-EXPOSE ${HELLO_PORT}
+EXPOSE $HELLO_PORT
 
 ENTRYPOINT ["node", "app.js"]
